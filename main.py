@@ -64,7 +64,7 @@ class TinderFinderBot():
         sleep(5)
 
 
-    def manage_likes_and_dislikes(self):
+    def manage_swipes(self):
         # Allow location
         allow_location_btn = self.driver.find_element(
             by=By.XPATH, value='//*[@id="t-1801918317"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
@@ -81,8 +81,8 @@ class TinderFinderBot():
         # cookies.click()
 
 
-        # Like counter
-        like_count = 0
+        # Swipe counter
+        swipe_count = 1
 
         # Hit those Like and Dislike buttons - we'll use arrow keys
         actions = ActionChains(self.driver)
@@ -94,14 +94,14 @@ class TinderFinderBot():
             try:
                 actions.send_keys(Keys.ARROW_RIGHT)
                 actions.perform()
-                like_count += 1  # Increment the number of likes
+                swipe_count += 1  # Increment the number of likes
 
                 # Check if it's time to dislike after 5 likes
-                if like_count % 5 == 0:
+                if swipe_count % 5 == 0:
                     sleep(5)  # Add a delay to ensure I can override some stupid decision
                     actions.send_keys(Keys.ARROW_LEFT)
                     actions.perform()
-                    like_count = 0
+                    swipe_count = 1
             except ElementClickInterceptedException:
                 try:
                     match_popup = self.driver.find_element(
@@ -120,7 +120,7 @@ class TinderFinderBot():
 def main():
     tf_bot = TinderFinderBot()
     tf_bot.login()
-    tf_bot.manage_likes_and_dislikes()
+    tf_bot.manage_swipes()
     tf_bot.quit()
 
 
