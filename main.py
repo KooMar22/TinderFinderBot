@@ -6,6 +6,7 @@ from selenium.webdriver import ActionChains
 from selenium.common.exceptions import ElementClickInterceptedException, NoSuchElementException
 from time import sleep
 from decouple import config
+from random import randint
 
 
 # Read the values from the ".env" file
@@ -32,7 +33,7 @@ class TinderFinderBot():
         # Reject cookies
         sleep(2)
         cookie_reject_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="t-73537241"]/div/div[2]/div/div/div[1]/div[2]/button/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="q1388042758"]/div/div[2]/div/div/div[1]/div[2]/button/div[2]/div[2]')
         cookie_reject_btn.click()
 
         # Click on Login button
@@ -42,7 +43,8 @@ class TinderFinderBot():
 
         # Choose to login with Facebook
         sleep(2)
-        fb_login = self.driver.find_element(by=By.XPATH, value='//*[@id="t-1801918317"]/main/div/div/div[1]/div/div/div[2]/div[2]/span/div[2]/button/div[2]/div[2]/div/div')
+        fb_login = self.driver.find_element(
+            by=By.XPATH, value='//*[@id="q-340338318"]/main/div/div/div[1]/div/div/div[2]/div[2]/span/div[2]/button/div[2]/div[2]/div/div')
         fb_login.click()
 
         # Switch to Facebook login window
@@ -67,12 +69,12 @@ class TinderFinderBot():
     def manage_swipes(self):
         # Allow location
         allow_location_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="t-1801918317"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="q-340338318"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
         allow_location_btn.click()
 
         # Disallow notifications
         notifications_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="t-1801918317"]/main/div/div/div/div[3]/button[2]/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="q-340338318"]/main/div/div/div/div[3]/button[2]/div[2]/div[2]')
         notifications_btn.click()
 
         # Allow cookies
@@ -82,7 +84,7 @@ class TinderFinderBot():
 
 
         # Swipe counter
-        swipe_count = 1
+        swipe_count = 0
 
         # Hit those Like and Dislike buttons - we'll use arrow keys
         actions = ActionChains(self.driver)
@@ -96,12 +98,15 @@ class TinderFinderBot():
                 actions.perform()
                 swipe_count += 1  # Increment the number of likes
 
+                # Generate a random number between 3 and 7
+                random_dislike = randint(3, 7)
+
                 # Check if it's time to dislike after 5 likes
-                if swipe_count % 5 == 0:
+                if swipe_count == random_dislike:
                     sleep(5)  # Add a delay to ensure I can override some stupid decision
                     actions.send_keys(Keys.ARROW_LEFT)
                     actions.perform()
-                    swipe_count = 1
+                    swipe_count = 0
             except ElementClickInterceptedException:
                 try:
                     match_popup = self.driver.find_element(
