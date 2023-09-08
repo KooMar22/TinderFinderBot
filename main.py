@@ -69,7 +69,7 @@ class TinderFinderBot():
     def manage_swipes(self):
         # Allow location
         allow_location_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="q-340338318"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
+            by=By.CLASS_NAME, value="l17p5q9z")
         allow_location_btn.click()
 
         # Disallow notifications
@@ -102,7 +102,7 @@ class TinderFinderBot():
                 random_dislike = randint(3, 7)
 
                 # Check if it's time to dislike after 5 likes
-                if swipe_count == random_dislike:
+                if swipe_count == random_dislike or swipe_count >= 9:
                     sleep(5)  # Add a delay to ensure I can override some stupid decision
                     actions.send_keys(Keys.ARROW_LEFT)
                     actions.perform()
