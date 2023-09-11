@@ -69,7 +69,7 @@ class TinderFinderBot():
     def manage_swipes(self):
         # Allow location
         allow_location_btn = self.driver.find_element(
-            by=By.CLASS_NAME, value="l17p5q9z")
+            by=By.XPATH, value='//*[@id="q-340338318"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
         allow_location_btn.click()
 
         # Disallow notifications
