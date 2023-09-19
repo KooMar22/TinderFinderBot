@@ -33,7 +33,7 @@ class TinderFinderBot():
         # Reject cookies
         sleep(2)
         cookie_reject_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="s187459460"]/div/div[2]/div/div/div[1]/div[2]/button/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="u1820263459"]/div/div[2]/div/div/div[1]/div[2]/button/div[2]/div[2]')
         cookie_reject_btn.click()
 
         # Click on Login button
@@ -44,7 +44,7 @@ class TinderFinderBot():
         # Choose to login with Facebook
         sleep(2)
         fb_login = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="s-1540921616"]/main/div/div/div[1]/div/div/div[2]/div[2]/span/div[2]/button/div[2]/div[2]/div/div')
+            by=By.XPATH, value='//*[@id="u91882383"]/main/div/div/div[1]/div/div/div[2]/div[2]/span/div[2]/button/div[2]/div[2]/div/div')
         fb_login.click()
 
         # Switch to Facebook login window
@@ -69,12 +69,12 @@ class TinderFinderBot():
     def manage_swipes(self):
         # Allow location
         allow_location_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="s-1540921616"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="u91882383"]/main/div/div/div/div[3]/button[1]/div[2]/div[2]')
         allow_location_btn.click()
 
         # Disallow notifications
         notifications_btn = self.driver.find_element(
-            by=By.XPATH, value='//*[@id="s-1540921616"]/main/div/div/div/div[3]/button[2]/div[2]/div[2]')
+            by=By.XPATH, value='//*[@id="u91882383"]/main/div/div/div/div[3]/button[2]/div[2]/div[2]')
         notifications_btn.click()
 
         # Allow cookies
